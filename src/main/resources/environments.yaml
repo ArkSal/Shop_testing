@@ -1,0 +1,28 @@
+environment:
+  integrate:
+    ulr: "http://146.59.32.4/index.php"
+    browser: "CHROME"
+    wait: "10"
+    existingUSerFirstName: "Arek"
+    existingUserLastName: "Sale"
+    existingUserEmail: "randommailexisting@mail.com"
+    ExistingUserPassword: "RandomPassword1"
+    flag: "N"
+  test:
+    ulr: "http://146.59.32.4/index.php"
+    browser: "CHROME"
+    wait: "15"
+    existingUSerFirstName: "Arek"
+    existingUserLastName: "Sale"
+    existingUserEmail: "randommailexisting@mail.com"
+    ExistingUserPassword: "RandomPassword1"
+    flag: "N"
+  stag:
+    ulr: "http://146.59.32.4/index.php"
+    browser: "FIREFOX"
+    wait: "20"
+    existingUSerFirstName: "Arek"
+    existingUserLastName: "Sale"
+    existingUserEmail: "randommailexisting@mail.com"
+    ExistingUserPassword: "RandomPassword1"
+    flag: "Y"
