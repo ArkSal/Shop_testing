@@ -32,8 +32,6 @@ public class BaseTest {
         logger.info("Initialized driverFactory object");
     }
 
-
-
     @BeforeEach
     void setup() {
         driver = driverFactory.getDriverOptions(Browsers.valueOf(environmentConfig.getBrowser()));

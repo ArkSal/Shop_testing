@@ -65,10 +65,10 @@ public class CreateAccountPage extends BasePage {
         } else socialTitleRadioButtons.get(1).click();
     }
 
-    public LoginPage clickSaveNewUSerButton() {
+    public MainPage clickSaveNewUSerButton() {
         saveNewUserButton.click();
         logger.info("New user form filled with new user");
-        return new LoginPage(driver);
+        return new MainPage(driver);
     }
 
 }

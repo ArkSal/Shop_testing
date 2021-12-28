@@ -35,9 +35,10 @@ public abstract class BasePage {
     }
 
     public void clickOnElement(WebElement elementToClick) {
-        String elementText = elementToClick.getText();
+        String elementText =
         wait.until(ExpectedConditions
-                .elementToBeClickable(elementToClick)).click();
+                .visibilityOf(elementToClick)).getText();
+        elementToClick.click();
         logger.info("Clicked on webelement {}", elementText);
     }
 
@@ -51,6 +52,17 @@ public abstract class BasePage {
     protected void waitUntilElementTagContainsText(WebElement webElement, String tagName, String tagValue){
         wait.until(ExpectedConditions.
                 attributeContains(webElement, tagName, tagValue));
+    }
+
+    protected boolean isElementDisplayed(WebElement webElement){
+        boolean isDisplayed = wait.until(ExpectedConditions.visibilityOf(webElement)).isDisplayed();
+        if(isDisplayed){
+            logger.info("{} element is displayed", webElement.getText());
+        }
+        else{
+            logger.info("{} element is not displayed", webElement.getText());
+        }
+        return isDisplayed;
     }
 
     protected WebElement getRandomElementFromList(List<WebElement> webElements){

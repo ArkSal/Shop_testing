@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.Getter;
 import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,8 +8,11 @@ import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Getter
 public class LoginPage extends BasePage {
-    Logger logger = LoggerFactory.getLogger(LoginPage.class);
+    private Logger logger = LoggerFactory.getLogger(LoginPage.class);
+
+    private HeaderPage headerPage;
 
     @FindBy(css = "[name='email']:not([placeholder])")
     private WebElement emailTextField;
@@ -30,6 +34,7 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        headerPage = new HeaderPage(driver);
     }
 
     public CreateAccountPage goToNewAccountCreation() {
@@ -37,23 +42,23 @@ public class LoginPage extends BasePage {
         return new CreateAccountPage(driver);
     }
 
-    public HeaderPage loginWithNonExistingUser() {
+    public LoginPage loginWithNonExistingUser() {
         sendKeysToElement(emailTextField, "Nonexisting@email.com");
         sendKeysToElement(passwordTextField, "randomPassword1");
         clickOnElement(sigInButton);
         logger.info("Logged with nonexistent user");
-        return new HeaderPage(driver);
+        return this;
     }
 
     public String getLoginAlertText() {
         return loginAlertInfo.getText();
     }
 
-    public HeaderPage loginWithAlreadyDefinedUser(User existingUser) {
+    public LoginPage loginWithAlreadyDefinedUser(User existingUser) {
         sendKeysToElement(emailTextField, existingUser.getEmail());
         sendKeysToElement(passwordTextField, existingUser.getPassword());
         clickOnElement(sigInButton);
         logger.info("Logged with already existing user");
-        return new HeaderPage(driver);
+        return new LoginPage(driver);
     }
 }

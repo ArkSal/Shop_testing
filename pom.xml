@@ -20,6 +20,7 @@
         <jackson.version>2.13.0</jackson.version>
         <faker.version>1.0.2</faker.version>
         <lombok.version>1.18.22</lombok.version>
+        <assertJ.version>3.21.0</assertJ.version>
 
         <Env_Value>TEST</Env_Value>
 <!--        <Env_Value>INTEGRATE</Env_Value>-->
@@ -112,6 +113,15 @@
             <artifactId>javafaker</artifactId>
             <version>${faker.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertJ.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
