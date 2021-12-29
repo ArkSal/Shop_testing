@@ -1,5 +1,6 @@
-package models;
+package models.user;
 
+import models.SocialTitle;
 import models.configuration.EnvironmentConfig;
 import providers.ConfigProvider;
 

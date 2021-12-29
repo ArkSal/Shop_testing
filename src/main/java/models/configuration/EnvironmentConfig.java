@@ -8,7 +8,7 @@ import lombok.Getter;
 public class EnvironmentConfig {
     private String ulr;
     private String browser;
-    private String wait;
+    private int wait;
     private String existingUSerFirstName;
     private String existingUserLastName;
     private String existingUserEmail;
@@ -16,5 +16,7 @@ public class EnvironmentConfig {
     private String FailLoginAlertMessage;
     private String onSalePageTitle;
     private String priceDrop;
+    private int productsQuantityRange;
+    private String productCustomizationText;
     private String flag;
 }

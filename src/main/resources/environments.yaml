@@ -9,6 +9,8 @@ environment:
     ExistingUserPassword: "RandomPassword1"
     onSalePageTitle: "ON SALE"
     priceDrop: "20"
+    productsQuantityRange: "5"
+    productCustomizationText: "Testing"
     flag: "N"
   test:
     ulr: "http://146.59.32.4/index.php"
@@ -21,6 +23,8 @@ environment:
     FailLoginAlertMessage: "Authentication failed."
     onSalePageTitle: "ON SALE"
     priceDrop: "20"
+    productsQuantityRange: "5"
+    productCustomizationText: "Testing"
     flag: "y"
   stag:
     ulr: "http://146.59.32.4/index.php"
@@ -33,4 +37,6 @@ environment:
     FailLoginAlertMessage: "Authentication failed."
     onSalePageTitle: "ON SALE"
     priceDrop: "20"
+    productsQuantityRange: "5"
+    productCustomizationText: "Testing"
     flag: "n"

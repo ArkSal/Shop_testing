@@ -2,6 +2,7 @@ package pages;
 
 import lombok.Getter;
 import models.WebListener;
+import models.basket.Basket;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -48,6 +49,9 @@ public class HeaderPage extends BasePage {
     @FindBy(css = "#top-menu >li")
     private List<WebElement> categoriesList;
 
+    @FindBy(css = ".header .cart-products-count")
+    private WebElement cartProductsCount;
+
     public HeaderPage(WebDriver driver) {
         super(driver);
     }
@@ -55,6 +59,10 @@ public class HeaderPage extends BasePage {
     public LoginPage clickSignInButton() {
         signInButton.click();
         return new LoginPage(driver);
+    }
+
+    public int getProductsCount(){
+        return Integer.parseInt(cartProductsCount.getText().replaceAll("[^0-9]",""));
     }
 
     public String getLoggerAccountFullName() {
@@ -98,6 +106,9 @@ public class HeaderPage extends BasePage {
         return element;
     }
 
+    public boolean isQuantityInCartIconCorrect(Basket basket){
+        return basket.getTotalQuantity()!=getProductsCount();
+    }
 
 
 

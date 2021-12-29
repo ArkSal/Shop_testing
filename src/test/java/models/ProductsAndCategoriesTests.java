@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.is;
 public class ProductsAndCategoriesTests extends BaseTest{
     private Logger logger = LoggerFactory.getLogger(ProductsAndCategoriesTests.class);
 
+
     @Test
     void iterateThoughCategoriesAndCheckIncompatibilities(){
         List<String> listWithDifferences =
@@ -37,8 +38,8 @@ public class ProductsAndCategoriesTests extends BaseTest{
 
 
     @Test
-    void validateIFPriceDropWorksCorrectly(){
-        SoftAssertions softly = new SoftAssertions();
+    void validateIfPriceDropWorksCorrectly(){
+        softly = new SoftAssertions();
         OnSalePage onSalePage =
                 application.open()
                         .getFooterPage()

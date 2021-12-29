@@ -1,5 +1,6 @@
 package pages;
 
+import models.basket.Basket;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +13,7 @@ import java.math.MathContext;
 
 public class ProductDetailsPage extends BasePage{
     private Logger logger = LoggerFactory.getLogger(ProductDetailsPage.class);
+    private int quantity;
 
     public ProductDetailsPage(WebDriver driver) {
         super(driver);
@@ -24,13 +26,24 @@ public class ProductDetailsPage extends BasePage{
     private WebElement regularPrice;
 
     @FindBy(css = "[itemprop='price']")
-    private WebElement priceAfterDiscount;
+    private WebElement price;
 
     @FindBy(css = "#quantity_wanted")
     private WebElement productQuantityField;
 
-    @FindBy(css = "[itemprop='itemListElement']:last-of-type")
+//    @FindBy(css = "[itemprop='itemListElement']:last-of-type")
+//    private WebElement productName;
+    @FindBy(css = "h1.h1")
     private WebElement productName;
+
+    @FindBy(css = ".add-to-cart")
+    private WebElement addToCartButton;
+
+    @FindBy(css = "[name='submitCustomizedData']")
+    private WebElement saveCustomizationButton;
+
+    @FindBy(css = ".product-message")
+    private WebElement customizationMessage;
 
     public boolean isDiscountDisplayed(){
         return isElementDisplayed(discountPercentageInfo);
@@ -45,11 +58,11 @@ public class ProductDetailsPage extends BasePage{
     }
 
     public boolean isPriceAfterDiscountDisplayed(){
-        return isElementDisplayed(priceAfterDiscount);
+        return isElementDisplayed(price);
     }
 
-    public BigDecimal getPriceAfterDiscount() {
-        return new BigDecimal(priceAfterDiscount.getAttribute("innerHTML").replaceAll("zł", ""));
+    public BigDecimal getPrice() {
+        return new BigDecimal(price.getAttribute("innerHTML").replaceAll("zł", ""));
     }
 
     public BigDecimal getRegularPrice() {
@@ -67,18 +80,52 @@ public class ProductDetailsPage extends BasePage{
         BigDecimal multiply = new BigDecimal(100- getDiscountPercentageInfo()).divide(new BigDecimal(100));
         BigDecimal priceAfterDiscount = getRegularPrice().multiply(multiply, mc);
         logger.info("Checking if price is calculated correctly");
-        return priceAfterDiscount.equals(getPriceAfterDiscount());
+        return priceAfterDiscount.equals(getPrice());
     }
 
     public ProductDetailsPage setProductQuantity(int productQuantity){
         sendKeysToElement(productQuantityField, String.valueOf(productQuantity));
+        this.quantity = productQuantity;
         return this;
     }
 
     public ProductDetailsPage setRandomProductQuantityInRange(int range){
         int randomizedRange = new RandomDataGenerator().getRandomNumberInRangeMinMax(1, range);
-        sendKeysToElement(productQuantityField, String.valueOf(randomizedRange));
+        setProductQuantity(randomizedRange);
         logger.info("Randomized value {} set to {} product ", randomizedRange, getProductName());
+        return this;
+    }
+
+    private boolean checkIfCustomizationNeeded(){
+        try {
+            return saveCustomizationButton.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void typeCustomizationMessageIfNeeded(){
+        if (checkIfCustomizationNeeded()){
+            logger.info("Customization message is needed");
+            String keysToSend = environmentConfig.getProductCustomizationText();
+            sendKeysToElement(customizationMessage, keysToSend);
+            logger.info("Message {} typed in message window", keysToSend);
+            clickOnElement(saveCustomizationButton);
+        }
+    }
+
+    public ShoppingCartPage clickAddToCartButton(){
+        typeCustomizationMessageIfNeeded();
+        clickOnElement(addToCartButton);
+        logger.info("Product {} added to basket", getProductName());
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        logger.info("Waiting for window to be presented");
+        waitForElementToBeVisible(shoppingCartPage.getProductAddedMessage());
+        return shoppingCartPage;
+    }
+
+    public ProductDetailsPage addProductToDatabase(Basket basket){
+        basket.addProductLineToBasket(getProductName(), getPrice(), quantity);
         return this;
     }
 }

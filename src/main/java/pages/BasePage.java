@@ -1,7 +1,10 @@
 package pages;
 
-import models.UserDatabase;
+import models.basket.Basket;
+import models.basket.BasketLine;
+import models.basket.Product;
 import models.configuration.EnvironmentConfig;
+import models.user.UserDatabase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,13 +27,16 @@ public abstract class BasePage {
     protected EnvironmentConfig environmentConfig;
     protected WebDriverWait wait;
     protected UserDatabase userDatabase;
+    protected Basket basket;
+    protected BasketLine basketLine;
+    protected Product product;
 
     public BasePage(WebDriver driver) {
         environmentConfig = ConfigProvider.getConfig();
         userDatabase = new UserDatabase();
         this.driver = driver;
         this.actions = new Actions(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(environmentConfig.getWait())));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(environmentConfig.getWait()));
         PageFactory.initElements(driver, this);
     }
 

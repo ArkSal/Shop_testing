@@ -1,7 +1,7 @@
 package pages;
 
 import lombok.Getter;
-import models.User;
+import models.user.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

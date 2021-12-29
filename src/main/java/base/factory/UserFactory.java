@@ -2,7 +2,7 @@ package base.factory;
 
 import com.github.javafaker.Faker;
 import models.SocialTitle;
-import models.User;
+import models.user.User;
 import models.configuration.EnvironmentConfig;
 import providers.ConfigProvider;
 

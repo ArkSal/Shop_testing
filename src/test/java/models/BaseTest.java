@@ -2,7 +2,9 @@ package models;
 
 import base.Application;
 import base.factory.DriverFactory;
+import models.basket.Basket;
 import models.configuration.EnvironmentConfig;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +25,8 @@ public class BaseTest {
     protected static EnvironmentConfig environmentConfig;
     protected Application application;
     private static DriverFactory driverFactory;
+    protected Basket basket;
+    protected SoftAssertions softly;
 
     @BeforeAll
     static void setDriver(){
@@ -38,7 +42,7 @@ public class BaseTest {
         logger.info("Driver initialized with additional options");
         actions = new Actions(driver);
         logger.info("Action initialized");
-        int waitValue = Integer.parseInt(environmentConfig.getWait());
+        int waitValue = environmentConfig.getWait();
         wait = new WebDriverWait(driver, Duration.ofSeconds(waitValue));
         logger.info("WaitDriver with " + waitValue + "secs value initialized");
         application = new Application(driver);

@@ -2,7 +2,7 @@ package pages;
 
 import base.factory.UserFactory;
 import models.SocialTitle;
-import models.User;
+import models.user.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -1,4 +1,6 @@
-package models;
+package models.user;
+
+import models.SocialTitle;
 
 import java.time.LocalDate;
 

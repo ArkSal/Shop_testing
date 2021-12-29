@@ -1,6 +1,7 @@
 package models;
 
 import base.factory.UserFactory;
+import models.user.User;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
