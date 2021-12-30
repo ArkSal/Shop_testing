@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import providers.TextFormatProvider;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -50,11 +51,11 @@ public class ProductMiniaturePage {
     }
 
     public BigDecimal getPriceAfterDiscount() {
-        return new BigDecimal(priceAfterDiscount.getAttribute("innerHTML").replaceAll("zł", ""));
+        return TextFormatProvider.getBigDecimalFromStringWithCurrency(priceAfterDiscount.getAttribute("innerHTML"));
     }
 
     public BigDecimal getRegularPrice() {
-        return new BigDecimal(regularPrice.getAttribute("innerHTML").replaceAll("zł", ""));
+        return TextFormatProvider.getBigDecimalFromStringWithCurrency(regularPrice.getAttribute("innerHTML"));
     }
 
     public int getDiscountPercentageInfo() {

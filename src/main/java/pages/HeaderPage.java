@@ -56,6 +56,11 @@ public class HeaderPage extends BasePage {
         super(driver);
     }
 
+    public ShoppingCartPage clickBasketIcon(){
+        clickOnElement(cartProductsCount);
+        return new ShoppingCartPage(driver);
+    }
+
     public LoginPage clickSignInButton() {
         signInButton.click();
         return new LoginPage(driver);

@@ -11,6 +11,8 @@ environment:
     priceDrop: "20"
     productsQuantityRange: "5"
     productCustomizationText: "Testing"
+    indexOfProductToSetQuantity: "0"
+    quantityToSetInProduct: "5"
     flag: "N"
   test:
     ulr: "http://146.59.32.4/index.php"
@@ -25,6 +27,8 @@ environment:
     priceDrop: "20"
     productsQuantityRange: "5"
     productCustomizationText: "Testing"
+    indexOfProductToSetQuantity: "0"
+    quantityToSetInProduct: "5"
     flag: "y"
   stag:
     ulr: "http://146.59.32.4/index.php"
@@ -39,4 +43,6 @@ environment:
     priceDrop: "20"
     productsQuantityRange: "5"
     productCustomizationText: "Testing"
+    indexOfProductToSetQuantity: "0"
+    quantityToSetInProduct: "5"
     flag: "n"

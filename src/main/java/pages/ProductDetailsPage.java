@@ -7,13 +7,14 @@ import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import providers.RandomDataGenerator;
+import providers.TextFormatProvider;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
 public class ProductDetailsPage extends BasePage{
     private Logger logger = LoggerFactory.getLogger(ProductDetailsPage.class);
-    private int quantity;
+    private int quantity =1;
 
     public ProductDetailsPage(WebDriver driver) {
         super(driver);
@@ -31,8 +32,6 @@ public class ProductDetailsPage extends BasePage{
     @FindBy(css = "#quantity_wanted")
     private WebElement productQuantityField;
 
-//    @FindBy(css = "[itemprop='itemListElement']:last-of-type")
-//    private WebElement productName;
     @FindBy(css = "h1.h1")
     private WebElement productName;
 
@@ -62,17 +61,15 @@ public class ProductDetailsPage extends BasePage{
     }
 
     public BigDecimal getPrice() {
-        return new BigDecimal(price.getAttribute("innerHTML").replaceAll("zł", ""));
+        return TextFormatProvider.getBigDecimalFromStringWithCurrency(price.getAttribute("innerHTML"));
     }
 
     public BigDecimal getRegularPrice() {
-        return new BigDecimal(regularPrice.getAttribute("innerHTML").replaceAll("zł", ""));
+        return TextFormatProvider.getBigDecimalFromStringWithCurrency(regularPrice.getAttribute("innerHTML"));
     }
 
     public int getDiscountPercentageInfo() {
-        return Integer.parseInt(discountPercentageInfo
-                .getAttribute("innerHTML")
-                .replaceAll("\\D+",""));
+     return TextFormatProvider.getIntFromString(discountPercentageInfo.getAttribute("innerHTML"));
     }
 
     public boolean isPriceCalculatedCorrectly(){
@@ -114,11 +111,11 @@ public class ProductDetailsPage extends BasePage{
         }
     }
 
-    public ShoppingCartPage clickAddToCartButton(){
+    public ProductAddedToBasketPopupPage clickAddToCartButton(){
         typeCustomizationMessageIfNeeded();
         clickOnElement(addToCartButton);
         logger.info("Product {} added to basket", getProductName());
-        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        ProductAddedToBasketPopupPage shoppingCartPage = new ProductAddedToBasketPopupPage(driver);
         logger.info("Waiting for window to be presented");
         waitForElementToBeVisible(shoppingCartPage.getProductAddedMessage());
         return shoppingCartPage;

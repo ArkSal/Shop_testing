@@ -70,12 +70,11 @@ public class CategoryPage extends BasePage {
         return new CategoryPage(driver);
     }
 
-    public CategoryPage addMessageToListIfTitlesNotEquals(List<String> listToAddBug, WebElement elementWithTitle){
+    public CategoryPage addMessageToListIfTitlesNotEquals(List<String> listToAddBug, String elementWithTitle){
         String titleFromCategoryBox = getCategoryBoxHeader().getText();
-        String titleFromMenu = elementWithTitle.getText();
-        if(!titleFromMenu.equals(titleFromCategoryBox)){
-            listToAddBug.add("Title on categoryBox is " + titleFromCategoryBox + ", menu title is " + titleFromMenu);
-            logger.error("Title on categoryBox is " + titleFromCategoryBox + ", menu title is " + titleFromMenu);
+        if(!elementWithTitle.equals(titleFromCategoryBox)){
+            listToAddBug.add("Title on categoryBox is " + titleFromCategoryBox + ", menu title is " + elementWithTitle);
+            logger.error("Title on categoryBox is " + titleFromCategoryBox + ", menu title is " + elementWithTitle);
             return new CategoryPage(driver);
         }
         logger.info("Titles are Equal");

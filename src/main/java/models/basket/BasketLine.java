@@ -29,8 +29,22 @@ public class BasketLine {
    }
 
    public void setQuantityAndCalculateTotalSum(int quantity){
-        this.quantity += quantity;
+        this.quantity = quantity;
         totalSum = getTotalSum();
+   }
+
+    public void addQuantityAndCalculateTotalSum(int quantity){
+        setQuantityAndCalculateTotalSum(this.quantity+quantity);
+    }
+
+
+
+   public void increaseQuantity(int quantityToAdd){
+        setQuantityAndCalculateTotalSum(quantity+quantityToAdd);
+   }
+
+   public void decreaseQuantity(int quantityToSubtract){
+        setQuantityAndCalculateTotalSum(quantity-quantityToSubtract);
    }
 
 

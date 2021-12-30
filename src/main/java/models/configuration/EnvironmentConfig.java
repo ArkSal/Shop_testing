@@ -18,5 +18,7 @@ public class EnvironmentConfig {
     private String priceDrop;
     private int productsQuantityRange;
     private String productCustomizationText;
+    private int indexOfProductToSetQuantity;
+    private int quantityToSetInProduct;
     private String flag;
 }

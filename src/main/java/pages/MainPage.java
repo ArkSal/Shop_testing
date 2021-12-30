@@ -49,11 +49,12 @@ public class MainPage extends BasePage {
     public List<String> getListOfInconsistenciesWhenIteratingCategories() {
         List<String> differencesList = new ArrayList<>();
         for (int i = 0; i < headerPage.getCategoriesList().size(); i++) {
+            String categoryName = headerPage.getCategoriesList().get(i).getText();
             clickOnElement(headerPage.getCategoriesList().get(i));
 
             new CategoryPage(driver).addMessageToListIfQuantityOfProductNotEqual(differencesList)
                     .addMessageToListIfMenuNotDisplayed(differencesList, headerPage.getCategoriesList().get(i))
-                    .addMessageToListIfTitlesNotEquals(differencesList, headerPage.getCategoriesList().get(i));
+                    .addMessageToListIfTitlesNotEquals(differencesList, categoryName);
         }
         return differencesList;
     }
@@ -64,14 +65,15 @@ public class MainPage extends BasePage {
             List<WebElement> subcategoriesList = headerPage.getCategoriesList().get(i).findElements(By.cssSelector(".category>a[data-depth='1']"));
             for (int j = 0; j < subcategoriesList.size(); j++) {
                 actions.moveToElement(headerPage.getCategoriesList().get(i)).build().perform();
+                String categoryName = headerPage.getCategoriesList().get(i).
+                        findElements(By.cssSelector(".category>a[data-depth='1']")).get(j).getText();
                 clickOnElement(headerPage.getCategoriesList().get(i).
                         findElements(By.cssSelector(".category>a[data-depth='1']")).get(j));
 
                 new CategoryPage(driver).addMessageToListIfQuantityOfProductNotEqual(differencesList)
                         .addMessageToListIfMenuNotDisplayed(differencesList, headerPage.getCategoriesList().get(i).
                                 findElements(By.cssSelector(".category>a[data-depth='1']")).get(j))
-                        .addMessageToListIfTitlesNotEquals(differencesList, headerPage.getCategoriesList().get(i).
-                                findElements(By.cssSelector(".category>a[data-depth='1']")).get(j));
+                        .addMessageToListIfTitlesNotEquals(differencesList, categoryName);
             }
         }
         return differencesList;
