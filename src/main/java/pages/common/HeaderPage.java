@@ -1,4 +1,4 @@
-package pages;
+package pages.common;
 
 import lombok.Getter;
 import models.WebListener;
@@ -11,7 +11,13 @@ import org.openqa.selenium.support.events.internal.EventFiringMouse;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.BasePage;
+import pages.accounts.LoginPage;
+import pages.accounts.MyAccountPage;
+import pages.basket.ShoppingCartPage;
+import pages.products.ProductsGridsPage;
 import providers.RandomDataGenerator;
+import providers.TextFormatProvider;
 
 import java.time.Duration;
 import java.util.List;
@@ -67,7 +73,7 @@ public class HeaderPage extends BasePage {
     }
 
     public int getProductsCount(){
-        return Integer.parseInt(cartProductsCount.getText().replaceAll("[^0-9]",""));
+        return TextFormatProvider.getIntFromString(cartProductsCount.getText());
     }
 
     public String getLoggerAccountFullName() {
@@ -112,9 +118,13 @@ public class HeaderPage extends BasePage {
     }
 
     public boolean isQuantityInCartIconCorrect(Basket basket){
-        return basket.getTotalQuantity()!=getProductsCount();
+        return basket.getTotalQuantity()==getProductsCount();
     }
 
+    public MyAccountPage clickMyAccount(){
+        clickOnElement(loggedAccountInfo);
+        return new MyAccountPage(driver);
+    }
 
 
 

@@ -1,4 +1,4 @@
-package pages;
+package pages.products;
 
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -6,13 +6,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.BasePage;
 import providers.RandomDataGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class ProductsGridsPage extends BasePage{
+public class ProductsGridsPage extends BasePage {
     private Logger logger = LoggerFactory.getLogger(ProductsGridsPage.class);
 
     @FindBy(css = ".product-miniature")

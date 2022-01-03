@@ -13,6 +13,9 @@ environment:
     productCustomizationText: "Testing"
     indexOfProductToSetQuantity: "0"
     quantityToSetInProduct: "5"
+    shippingMethodName: "TesterSii"
+    paymentMethodName: "Bank transfer"
+    orderStatus: "Awaiting bank wire payment"
     flag: "N"
   test:
     ulr: "http://146.59.32.4/index.php"
@@ -29,6 +32,9 @@ environment:
     productCustomizationText: "Testing"
     indexOfProductToSetQuantity: "0"
     quantityToSetInProduct: "5"
+    shippingMethodName: "TesterSii"
+    paymentMethodName: "Bank transfer"
+    orderStatus: "Awaiting bank wire payment"
     flag: "y"
   stag:
     ulr: "http://146.59.32.4/index.php"
@@ -45,4 +51,7 @@ environment:
     productCustomizationText: "Testing"
     indexOfProductToSetQuantity: "0"
     quantityToSetInProduct: "5"
+    shippingMethodName: "TesterSii"
+    paymentMethodName: "Bank transfer"
+    orderStatus: "Awaiting bank wire payment"
     flag: "n"

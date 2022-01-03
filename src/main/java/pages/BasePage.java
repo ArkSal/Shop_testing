@@ -41,7 +41,7 @@ public abstract class BasePage {
     public void clickOnElement(WebElement elementToClick) {
         String elementText =
         wait.until(ExpectedConditions
-                .visibilityOf(elementToClick)).getText();
+                .elementToBeClickable(elementToClick)).getText();
         elementToClick.click();
         logger.info("Clicked on webelement {}", elementText);
     }

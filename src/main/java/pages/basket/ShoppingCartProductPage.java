@@ -1,18 +1,22 @@
-package pages;
+package pages.basket;
 
 import lombok.Getter;
 import models.basket.BasketLine;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.BasePage;
 import providers.TextFormatProvider;
 
 import java.math.BigDecimal;
 
 @Getter
-public class ShoppingCartProductPage {
-    public ShoppingCartProductPage(WebElement shoppingCartProduct) {
+public class ShoppingCartProductPage extends BasePage {
+    public ShoppingCartProductPage(WebElement shoppingCartProduct, WebDriver driver) {
+        super(driver);
         PageFactory.initElements(new DefaultElementLocatorFactory(shoppingCartProduct), this);
     }
 
@@ -38,18 +42,17 @@ public class ShoppingCartProductPage {
     private WebElement removeItemFromBasketIcon;
 
     public String getProductName() {
+        wait.until(ExpectedConditions.elementToBeClickable(productName));
         return productName.getText();
     }
 
     public BigDecimal getPrice() {
-        return TextFormatProvider.getBigDecimalFromStringWithCurrency(singleProductPrice.getAttribute("innerHTML"));
-    }
-
-    public BigDecimal getTotalProductPrice() {
-        return TextFormatProvider.getBigDecimalFromStringWithCurrency(singleProductTotalPrice.getAttribute("innerHTML"));
+        waitForElementToBeVisible(singleProductPrice);
+        return TextFormatProvider.getBigDecimalFromStringWithCurrency(singleProductPrice.getText());
     }
 
     public int getQuantity(){
+        wait.until(ExpectedConditions.elementToBeClickable(singleProductQuantityField));
         return TextFormatProvider.getIntFromString(singleProductQuantityField.getAttribute("value"));
     }
 

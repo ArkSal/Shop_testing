@@ -20,8 +20,18 @@ public class BasketLine {
         this.totalSum = getTotalSum();
     }
 
+    public BasketLine(String name, BigDecimal price, int quantity, BigDecimal totalSum) {
+        this.product = new Product(name, price);
+        this.quantity = quantity;
+        this.totalSum = totalSum;
+    }
+
     public BigDecimal getTotalSum(){
         return product.getPrice().multiply(BigDecimal.valueOf(quantity)).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal getSumasdasdsa(){
+        return totalSum;
     }
 
    public String getProductName(){
@@ -36,8 +46,6 @@ public class BasketLine {
     public void addQuantityAndCalculateTotalSum(int quantity){
         setQuantityAndCalculateTotalSum(this.quantity+quantity);
     }
-
-
 
    public void increaseQuantity(int quantityToAdd){
         setQuantityAndCalculateTotalSum(quantity+quantityToAdd);

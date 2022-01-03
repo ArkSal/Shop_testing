@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.BasePage;
-import pages.MainPage;
+import pages.common.MainPage;
 import providers.ConfigProvider;
 
 public class Application extends BasePage {

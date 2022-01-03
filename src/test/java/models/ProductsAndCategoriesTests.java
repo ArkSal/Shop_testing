@@ -4,8 +4,8 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.OnSalePage;
-import pages.ProductDetailsPage;
+import pages.products.OnSalePage;
+import pages.products.ProductDetailsPage;
 
 import java.util.List;
 

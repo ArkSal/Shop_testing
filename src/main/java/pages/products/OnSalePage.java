@@ -1,4 +1,4 @@
-package pages;
+package pages.products;
 
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -6,11 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.BasePage;
 
 import java.util.List;
 
 @Getter
-public class OnSalePage extends BasePage{
+public class OnSalePage extends BasePage {
     private Logger logger = LoggerFactory.getLogger(OnSalePage.class);
     private ProductsGridsPage productsGridsPage;
 

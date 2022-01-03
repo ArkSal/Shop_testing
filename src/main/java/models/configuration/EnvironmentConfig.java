@@ -20,5 +20,8 @@ public class EnvironmentConfig {
     private String productCustomizationText;
     private int indexOfProductToSetQuantity;
     private int quantityToSetInProduct;
+    private String shippingMethodName;
+    private String paymentMethodName;
+    private String orderStatus;
     private String flag;
 }

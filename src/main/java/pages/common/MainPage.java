@@ -1,10 +1,15 @@
-package pages;
+package pages.common;
 
 import lombok.Getter;
+import models.basket.Basket;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.BasePage;
+import pages.products.ProductAddedToBasketPopupPage;
+import pages.products.ProductsGridsPage;
+import pages.basket.ShoppingCartPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,5 +83,24 @@ public class MainPage extends BasePage {
         }
         return differencesList;
     }
+
+    public ShoppingCartPage addRandomProductToBasket(int amountOfProductsToAdd, int quantitySet, Basket basket){
+        for (int i = 0; i < amountOfProductsToAdd; i++) {
+            ProductAddedToBasketPopupPage popupPage =
+                    headerPage.clickRandomCategory()
+                    .clickOnRandomProductMiniature()
+                    .setRandomProductQuantityInRange(quantitySet)
+                    .addProductToDatabase(basket)
+                    .clickAddToCartButton();
+            if(i==(amountOfProductsToAdd-1)){
+                popupPage.clickProceedToCheckout();
+            }
+            else{
+                popupPage.clickContinueShopping();
+            }
+        }
+        return new ShoppingCartPage(driver);
+    }
+
 
 }

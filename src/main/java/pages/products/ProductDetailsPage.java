@@ -1,4 +1,4 @@
-package pages;
+package pages.products;
 
 import models.basket.Basket;
 import org.openqa.selenium.WebDriver;
@@ -6,13 +6,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.BasePage;
 import providers.RandomDataGenerator;
 import providers.TextFormatProvider;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-public class ProductDetailsPage extends BasePage{
+public class ProductDetailsPage extends BasePage {
     private Logger logger = LoggerFactory.getLogger(ProductDetailsPage.class);
     private int quantity =1;
 
@@ -108,6 +109,8 @@ public class ProductDetailsPage extends BasePage{
             sendKeysToElement(customizationMessage, keysToSend);
             logger.info("Message {} typed in message window", keysToSend);
             clickOnElement(saveCustomizationButton);
+            setProductQuantity(this.quantity);
+            System.out.println(productQuantityField.getText());
         }
     }
 

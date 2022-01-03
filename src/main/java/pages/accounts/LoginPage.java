@@ -1,4 +1,4 @@
-package pages;
+package pages.accounts;
 
 import lombok.Getter;
 import models.user.User;
@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.BasePage;
+import pages.common.HeaderPage;
 
 @Getter
 public class LoginPage extends BasePage {

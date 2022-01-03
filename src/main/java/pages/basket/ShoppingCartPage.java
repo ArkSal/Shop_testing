@@ -1,4 +1,4 @@
-package pages;
+package pages.basket;
 
 import models.basket.Basket;
 import models.basket.BasketLine;
@@ -8,18 +8,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.BasePage;
 import providers.TextFormatProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartPage extends BasePage{
+public class ShoppingCartPage extends BasePage {
     Logger logger = LoggerFactory.getLogger(ShoppingCartPage.class);
     public ShoppingCartPage(WebDriver driver) {
         super(driver);
     }
 
-    @FindBy(css = "a.btn-primary")
+    @FindBy(css = ".checkout .btn-primary")
     private WebElement proceedToCheckoutButton;
 
     @FindBy(css = ".cart-total .value")
@@ -34,7 +35,7 @@ public class ShoppingCartPage extends BasePage{
     public List<ShoppingCartProductPage> createProductsList() {
         List<ShoppingCartProductPage> productsShoppingCartList = new ArrayList<>();
         for (WebElement product : productsList) {
-            productsShoppingCartList.add(new ShoppingCartProductPage(product));
+            productsShoppingCartList.add(new ShoppingCartProductPage(product, driver));
         }
         logger.info("List of product in shopping cart created");
         return productsShoppingCartList;
@@ -96,9 +97,14 @@ public class ShoppingCartPage extends BasePage{
 
     public void waitUntilTotalPriceIsUpdated(int previousQuantity, int increase) {
         wait.until(x -> getTotalQuantity()==(previousQuantity + increase));
-
     }
 
+    public AddressesPage clickProceedToCheckoutButton(){
+        String buttonName = proceedToCheckoutButton.getText();
+        clickOnElement(proceedToCheckoutButton);
+        logger.info("{} button clicked", buttonName);
+        return new AddressesPage(driver);
+    }
 
 
 

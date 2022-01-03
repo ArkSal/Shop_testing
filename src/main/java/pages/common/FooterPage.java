@@ -1,10 +1,12 @@
-package pages;
+package pages.common;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.BasePage;
+import pages.products.OnSalePage;
 
 public class FooterPage extends BasePage {
     private Logger logger = LoggerFactory.getLogger(FooterPage.class);

@@ -1,4 +1,4 @@
-package pages;
+package pages.products;
 
 import lombok.Getter;
 import models.basket.Basket;
@@ -8,11 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.BasePage;
+import pages.basket.ShoppingCartPage;
 import providers.TextFormatProvider;
 
 import java.math.BigDecimal;
 @Getter
-public class ProductAddedToBasketPopupPage extends BasePage{
+public class ProductAddedToBasketPopupPage extends BasePage {
     private Logger logger = LoggerFactory.getLogger(ProductAddedToBasketPopupPage.class);
     public ProductAddedToBasketPopupPage(WebDriver driver) {
         super(driver);

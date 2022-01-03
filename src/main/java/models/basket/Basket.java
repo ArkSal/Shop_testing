@@ -64,12 +64,4 @@ public class Basket {
                 .sum();
     }
 
-//     public void print(){
-//         for (BasketLine basketLine : productsInBasket) {
-//             System.out.println(basketLine.getProductName());
-//             System.out.println(basketLine.getQuantity());
-//             System.out.println(basketLine.getProduct().getPrice());
-//             System.out.println(basketLine.getTotalSum());
-//         }
-//     }
 }

@@ -54,5 +54,6 @@ public class RegisterUserTest extends BaseTest {
                         .getLoggerAccountFullName();
 
         assertThat(createdAccountName, equalTo(newRandomCreatedUser.getUserFullName()));
+
     }
 }
