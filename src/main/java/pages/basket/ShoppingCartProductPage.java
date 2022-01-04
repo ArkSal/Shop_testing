@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 import providers.TextFormatProvider;
 
@@ -42,17 +41,14 @@ public class ShoppingCartProductPage extends BasePage {
     private WebElement removeItemFromBasketIcon;
 
     public String getProductName() {
-        wait.until(ExpectedConditions.elementToBeClickable(productName));
         return productName.getText();
     }
 
     public BigDecimal getPrice() {
-        waitForElementToBeVisible(singleProductPrice);
         return TextFormatProvider.getBigDecimalFromStringWithCurrency(singleProductPrice.getText());
     }
 
     public int getQuantity(){
-        wait.until(ExpectedConditions.elementToBeClickable(singleProductQuantityField));
         return TextFormatProvider.getIntFromString(singleProductQuantityField.getAttribute("value"));
     }
 
