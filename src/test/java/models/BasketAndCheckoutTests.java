@@ -6,7 +6,6 @@ import models.address.Address;
 import models.basket.Basket;
 import models.user.User;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import pages.accounts.OrderHistoryLinePage;
 import pages.accounts.SingleOrderDetailsPage;
@@ -41,7 +40,7 @@ public class BasketAndCheckoutTests extends BaseTest{
         softly.assertAll();
     }
 
-    @RepeatedTest(10)
+    @Test
     void basketOperationsTest(){
         softly = new SoftAssertions();
         basket = new Basket();
