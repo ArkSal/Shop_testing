@@ -37,7 +37,7 @@ public class ShoppingCartPage extends BasePage {
         for (WebElement product : productsList) {
             productsShoppingCartList.add(new ShoppingCartProductPage(product, driver));
         }
-        logger.info("List of product in shopping cart created");
+        logger.info("List of products in shopping cart created");
         return productsShoppingCartList;
     }
 
@@ -54,7 +54,7 @@ public class ShoppingCartPage extends BasePage {
         int differenceInSingleProductQuantity = quantityToSet-basket.getProductsInBasket().get(indexOfProductToSet).getQuantity();
         sendKeysToElement(createProductsList().get(indexOfProductToSet).getSingleProductQuantityField(), String.valueOf(quantityToSet));
         actions.sendKeys(Keys.ENTER).build().perform();
-        waitUntilTotalPriceIsUpdated(quantityBeforeChange, differenceInSingleProductQuantity);
+        waitUntilQuantityMessageIsUpdated(quantityBeforeChange, differenceInSingleProductQuantity);
         BasketLine basketLine = basket.getProductsInBasket().get(indexOfProductToSet);
         basketLine.setQuantityAndCalculateTotalSum(quantityToSet);
         logger.info("{} product quantity set to: {}", basketLine.getProductName(), quantityToSet);
@@ -66,7 +66,7 @@ public class ShoppingCartPage extends BasePage {
         for (int i = 0; i < amountOfClicks; i++) {
             clickOnElement(createProductsList().get(indexOfProductToIncrease).getQuantityIncreaseButton());
             logger.info("Quantity increased");
-            waitUntilTotalPriceIsUpdated(quantityBeforeChange, 1);
+            waitUntilQuantityMessageIsUpdated(quantityBeforeChange, 1);
         }
         basket.getProductsInBasket().get(indexOfProductToIncrease).increaseQuantity(amountOfClicks);
         return this;
@@ -77,7 +77,7 @@ public class ShoppingCartPage extends BasePage {
         for (int i = 0; i < amountOfClicks; i++) {
             clickOnElement(createProductsList().get(indexOfProductToDecrease).getQuantityDecreaseButton());
             logger.info("Quantity decreased");
-            waitUntilTotalPriceIsUpdated(quantityBeforeChange, -1);
+            waitUntilQuantityMessageIsUpdated(quantityBeforeChange, -1);
         }
         basket.getProductsInBasket().get(indexOfProductToDecrease).decreaseQuantity(amountOfClicks);
         return this;
@@ -87,6 +87,8 @@ public class ShoppingCartPage extends BasePage {
         String productName = basket.getProductsInBasket().get(indexOfProduct).getProductName();
         clickOnElement(createProductsList().get(indexOfProduct).getRemoveItemFromBasketIcon());
         basket.getProductsInBasket().remove(indexOfProduct);
+        int actualQuantity = basket.getTotalQuantity();
+        waitUntilQuantityMessageIsUpdated(actualQuantity);
         logger.info("Deleted {} from basket", productName);
         return this;
     }
@@ -95,8 +97,12 @@ public class ShoppingCartPage extends BasePage {
         return TextFormatProvider.getIntFromString((itemsQuantityMessage.getText()));
     }
 
-    public void waitUntilTotalPriceIsUpdated(int previousQuantity, int increase) {
+    public void waitUntilQuantityMessageIsUpdated(int previousQuantity, int increase) {
         wait.until(x -> getTotalQuantity()==(previousQuantity + increase));
+    }
+
+    public void waitUntilQuantityMessageIsUpdated(int actualQuantity) {
+        wait.until(x -> getTotalQuantity()==actualQuantity);
     }
 
     public AddressesPage clickProceedToCheckoutButton(){
